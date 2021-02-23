@@ -1,0 +1,34 @@
+{
+  "name": "azc5184-430-project-1",
+  "version": "1.0.0",
+  "engines": {
+    "node": "v14.15.1",
+    "npm": "6.14.9"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\"",
+    "start": "node ./src/index.js",
+    "nodemon": "nodemon ./src/index.js -e js,html,css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annaconway/azc5184-430-project-1.git"
+  },
+  "keywords": [],
+  "author": "Anna Conway",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annaconway/azc5184-430-project-1/issues"
+  },
+  "homepage": "https://github.com/annaconway/azc5184-430-project-1#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
