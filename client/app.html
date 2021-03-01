@@ -38,11 +38,15 @@
     </aside>
 
     <section>
-        <h2>Routine Manager</h2>
+        <h2>Routine Manager (Broken!! Try Builder instead)</h2>
         <hr>
 
         <h2>Routine Details</h2>
-        <p><button id="btnRoutine">Show me my routine</button></p>
+        <form id="myForm" action="/getRoutine" method="get">
+            <label for="nameGet">Name: </label>
+            <input id="nameGetField" type="text" name="nameGet">
+            <p><button id="btnRoutine">Show me my routine</button></p>
+        </form>
         <div id="routines">
 
         </div>

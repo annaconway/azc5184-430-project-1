@@ -73,9 +73,11 @@
 
             // Grab input types
             const nameField = form.querySelector('#nameField');
+            const skinField = form.querySelector('input[name="skin"]:checked');
             const cleanserField = form.querySelector('#cleanserField');
             const moisturizerField = form.querySelector('#moisturizerField');
             const sunscreenField = form.querySelector('#sunscreenField');
+            const concernsField = form.querySelector('#concernsField');
 
             // Request data
             const xhr = new XMLHttpRequest();
@@ -88,7 +90,7 @@
             xhr.onload = () => handleResponse(xhr);
 
             // Create data string
-            const formData = `name=${nameField.value}&cleanser=${cleanserField.value}&moisturizer=${moisturizerField.value}&sunscreenField=${sunscreenField.value}`;
+            const formData = `name=${nameField.value}&skinType=${skinField.value}&skinConcerns=${concernsField.value}&cleanser=${cleanserField.value}&moisturizer=${moisturizerField.value}&sunscreenField=${sunscreenField.value}`;
 
             // Send the data string to the URL
             xhr.send(formData);
@@ -139,20 +141,25 @@
 
     <section>
         <form id="personalForm" action="/addRoutine" method="post">
-            <input id="dryField" type="radio" name="skin" value="dry">
-            <label for="dry">Dry</label><br>
+            <div id="skinField">
+                <input id="dryField" type="radio" name="skin" value="Dry">
+                <label for="dry" checked>Dry</label><br>
 
-            <input id="oilyField" type="radio" name="skin" value="oily">
-            <label for="oily">Oily</label><br>
+                <input id="oilyField" type="radio" name="skin" value="Oily">
+                <label for="oily">Oily</label><br>
 
-            <input id="combinationField" type="radio" name="skin" value="combination">
-            <label for="combination">Combination</label> <br>
+                <input id="combinationField" type="radio" name="skin" value="Combination">
+                <label for="combination">Combination</label> <br>
 
-            <input id="normalField" type="radio" name="skin" value="normal">
-            <label for="normal">Normal</label> <br>
+                <input id="normalField" type="radio" name="skin" value="Normal">
+                <label for="normal">Normal</label> <br>
+            </div>
 
             <label for="name">Name: </label>
             <input id="nameField" type="text" name="name" /><br>
+
+            <label for="concerns">Skins Concerns: </label>
+            <input id="concernsField" type="text" name="concerns" /><br>
 
             <label for="cleanser">Cleanser: </label>
             <input id="cleanserField" type="text" name="cleanser" /><br>
