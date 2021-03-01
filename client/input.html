@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HEAD  -->
+
+<head>
+    <meta charset='utf-8' />
+    <title>Skindigo Routine Builder</title>
+
+    <!-- FAVICON -->
+    <!-- FONT -->
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/default-styles.css">
+    <!-- SCRIPT -->
+    <script src="/src/postModule.js"></script>
+</head>
+
+
+<!-- BODY  -->
+
+<body>
+
+    <!-- MAIN  -->
+    <main>
+        <h1>Welcome to Skindigo</h1>
+        <p>Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
+    </main>
+
+    <!-- CONTROLS  -->
+    <aside id="links ">
+        <h2>Site traversal</h2>
+        <ul id="navigation">
+            <li><a href="/home.html">Home</a></li>
+            <li><a href="/information.html">Routine Guide</a></li>
+            <li><a href="/app.html">Routine App</a></li>
+            <li><a href="/input.html">Routine Builder</a></li>
+            <li><a href="/admin.html">Admin Page</a></li>
+        </ul>
+    </aside>
+
+    <section>
+        <form id="personalForm" action="/addRoutine" method="post">
+            <input id="dryField" type="radio" name="skin" value="dry">
+            <label for="dry">Dry</label><br>
+
+            <input id="oilyField" type="radio" name="skin" value="oily">
+            <label for="oily">Oily</label><br>
+
+            <input id="combinationField" type="radio" name="skin" value="combination">
+            <label for="combination">Combination</label> <br>
+
+            <input id="normalField" type="radio" name="skin" value="normal">
+            <label for="normal">Normal</label> <br>
+
+            <label for="name">Name: </label>
+            <input id="nameField" type="text" name="name" /><br>
+
+            <label for="cleanser">Cleanser: </label>
+            <input id="cleanserField" type="text" name="cleanser" /><br>
+
+            <label for="moisturizer">Moisturizer: </label>
+            <input id="moisturizerField" type="text" name="moisturizer" /><br>
+
+            <label for="sunscreen">Sunscreen: </label>
+            <input id="sunscreenField" type="text" name="sunscreen" /><br>
+
+            <input type="submit" value="Post Routine" />
+        </form>
+    </section>
+    <div id="responseCodes">
+    </div>
+
+    <!-- FOOTER  -->
+    <footer>
+        <hr>
+        <p><i>Project 1 by Anna Conway</i></p>
+    </footer>
+</body>
+
+</html>
+
+</html>
