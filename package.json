@@ -6,9 +6,9 @@
         "npm": "6.14.9"
     },
     "description": "",
-    "main": "index.js",
+    "main": "server.js",
     "scripts": {
-        "pretest": "eslint ./src --fix",
+        "pretest": "npx eslint ./src --fix",
         "test": "echo \"Tests complete\"",
         "start": "node ./src/server.js",
         "nodemon": "nodemon ./src/server.js -e js,html,css"
@@ -25,6 +25,8 @@
     },
     "homepage": "https://github.com/annaconway/azc5184-430-project-1#readme",
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.15.0",
+        "@typescript-eslint/parser": "^4.15.0",
         "eslint": "^7.20.0",
         "eslint-config-airbnb": "^18.2.1",
         "eslint-config-airbnb-base": "^14.2.1",
@@ -32,6 +34,7 @@
         "nodemon": "^2.0.7"
     },
     "dependencies": {
+        "express": "^4.17.1",
         "underscore": "^1.12.0"
     }
 }
