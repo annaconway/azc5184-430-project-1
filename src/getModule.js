@@ -28,6 +28,20 @@ const downloadRoutines = (e) => {
     xhr.send();
 };
 
+
+//------------------------
+// INITIALIZE ELEMENTS
+//------------------------
+const init = () => {
+    if (document.querySelector('#btnRoutine')) {
+        document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
+    }
+    if (document.querySelector('#btnRoutines')) {
+        document.querySelector('#btnRoutines').addEventListener('click', downloadRoutines);
+    }
+};
+
+
 //------------------------
 // PARSE JSON SO ITS 
 // READABLE
@@ -66,18 +80,6 @@ const handleResponse = (xhr) => {
             <p><b>Sunscreen:</b> ${obj[i].sunscreen}</p>
             <p><button class="editButton">Edit</button></p>`;
         }
-    }
-};
-
-//------------------------
-// INITIALIZE ELEMENTS
-//------------------------
-const init = () => {
-    if (document.querySelector('#btnRoutine')) {
-        document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
-    }
-    if (document.querySelector('#btnRoutines')) {
-        document.querySelector('#btnRoutines').addEventListener('click', downloadRoutines);
     }
 };
 
