@@ -22,26 +22,6 @@
         //------------------------
 
 
-        //------------------------
-        // DOWNLOAD FROM JSON
-        //------------------------
-        const downloadRoutines = (e) => {
-            // Grab URLs to download from
-            const routineURL = '/routines';
-            const routinesURL = '/routines?limit=10';
-            const xhr = new XMLHttpRequest();
-            xhr.onload = handleResponse;
-
-            // Return 1 or >1 routine
-            if (e.target.id === 'btnRoutine') {
-                xhr.open('GET', routineURL);
-            } else if (e.target.id === 'btnRoutines') {
-                xhr.open('GET', routinesURL);
-            }
-
-            xhr.setRequestHeader('Accept', 'application/javascript');
-            xhr.send();
-        };
 
         //------------------------
         // PARSE JSON SO ITS 
@@ -82,6 +62,27 @@
                         <p><button class="editButton">Edit</button></p>`;
                 }
             }
+        };
+
+        //------------------------
+        // DOWNLOAD FROM JSON
+        //------------------------
+        const downloadRoutines = (e) => {
+            // Grab URLs to download from
+            const routineURL = '/routines';
+            const routinesURL = '/routines?limit=10';
+            const xhr = new XMLHttpRequest();
+            xhr.onload = handleResponse;
+
+            // Return 1 or >1 routine
+            if (e.target.id === 'btnRoutine') {
+                xhr.open('GET', routineURL);
+            } else if (e.target.id === 'btnRoutines') {
+                xhr.open('GET', routinesURL);
+            }
+
+            xhr.setRequestHeader('Accept', 'application/javascript');
+            xhr.send();
         };
 
         //------------------------

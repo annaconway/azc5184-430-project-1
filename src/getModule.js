@@ -7,40 +7,6 @@
 //------------------------
 
 
-//------------------------
-// DOWNLOAD FROM JSON
-//------------------------
-const downloadRoutines = (e) => {
-    // Grab URLs to download from
-    const routineURL = '/routines';
-    const routinesURL = '/routines?limit=10';
-    const xhr = new XMLHttpRequest();
-    xhr.onload = handleResponse;
-
-    // Return 1 or >1 routine
-    if (e.target.id === 'btnRoutine') {
-        xhr.open('GET', routineURL);
-    } else if (e.target.id === 'btnRoutines') {
-        xhr.open('GET', routinesURL);
-    }
-
-    xhr.setRequestHeader('Accept', 'application/javascript');
-    xhr.send();
-};
-
-
-//------------------------
-// INITIALIZE ELEMENTS
-//------------------------
-const init = () => {
-    if (document.querySelector('#btnRoutine')) {
-        document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
-    }
-    if (document.querySelector('#btnRoutines')) {
-        document.querySelector('#btnRoutines').addEventListener('click', downloadRoutines);
-    }
-};
-
 
 //------------------------
 // PARSE JSON SO ITS 
@@ -82,5 +48,41 @@ const handleResponse = (xhr) => {
         }
     }
 };
+
+
+//------------------------
+// DOWNLOAD FROM JSON
+//------------------------
+const downloadRoutines = (e) => {
+    // Grab URLs to download from
+    const routineURL = '/routines';
+    const routinesURL = '/routines?limit=10';
+    const xhr = new XMLHttpRequest();
+    xhr.onload = handleResponse;
+
+    // Return 1 or >1 routine
+    if (e.target.id === 'btnRoutine') {
+        xhr.open('GET', routineURL);
+    } else if (e.target.id === 'btnRoutines') {
+        xhr.open('GET', routinesURL);
+    }
+
+    xhr.setRequestHeader('Accept', 'application/javascript');
+    xhr.send();
+};
+
+
+//------------------------
+// INITIALIZE ELEMENTS
+//------------------------
+const init = () => {
+    if (document.querySelector('#btnRoutine')) {
+        document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
+    }
+    if (document.querySelector('#btnRoutines')) {
+        document.querySelector('#btnRoutines').addEventListener('click', downloadRoutines);
+    }
+};
+
 
 window.onload = init;
