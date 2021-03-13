@@ -9,9 +9,151 @@
 
     <!-- FAVICON -->
     <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Reenie+Beanie&family=Tenor+Sans&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/default-styles.css">
     <!-- SCRIPT -->
+    <script>
+        //------------------------
+        // AJAX MODULE JS THAT
+        // HANDLES DOWNLOADING AND
+        // GRABBING ROUTINES
+        //------------------------
+        // ATTACHED TO ADMIN.HTML
+        //------------------------
+
+
+
+        //------------------------
+        // PARSE JSON SO ITS 
+        // READABLE
+        //------------------------
+        const handleResponse = (xhr) => {
+            // Turn xhr into JSON object that can be made readable
+            const obj = JSON.parse(xhr.target.response);
+            console.log('obj=', obj);
+            console.log(obj.length);
+
+            // Store container for AJAX call
+            const container = document.querySelector('#routines');
+
+            let newObj;
+            if (obj["temp"])
+            {
+                newObj = obj["temp"];
+            }
+
+            // Format into HTML
+            if (obj.length === 1) {
+                container.innerHTML = `
+                    <hr>
+                    <p><b>Name:</b> ${obj[0].name}</p>
+                    <p><b>Skin Type:</b> ${obj[0].skinType}</p>
+                    <p><b>Skin Concerns:</b> ${obj[0].skinConcerns}</p>
+                    <p><b>Cleanser:</b> ${obj[0].cleanser}</p>
+                    <p><b>Moisturizer:</b> ${obj[0].moisturizer}</p>
+                    <p><b>Sunscreen:</b> ${obj[0].sunscreen}</p>`;
+                    
+
+            } 
+            else if (newObj.length>=1)
+            {
+                container.innerHTML = "";
+                for (let i = 0; i < newObj.length; i += 1) {
+                    document.querySelector('#routines').innerHTML +=
+                        `<hr>
+                        <p><b>Name:</b> ${newObj[i].name}</p>
+                        <p><b>Skin Type:</b> ${newObj[i].skinType}</p>
+                        <p><b>Skin Concerns:</b> ${newObj[i].skinConcerns}</p>
+                        <p><b>Cleanser:</b> ${newObj[i].cleanser}</p>
+                        <p><b>Moisturizer:</b> ${newObj[i].moisturizer}</p>
+                        <p><b>Sunscreen:</b> ${newObj[i].sunscreen}</p>`;
+                
+
+                }
+            }else if (obj.length > 1) {
+                    container.innerHTML = "";
+                for (let i = 0; i < obj.length; i += 1) {
+                    document.querySelector('#routines').innerHTML +=
+                        `<hr>
+                        <p><b>Name:</b> ${obj[i].name}</p>
+                        <p><b>Skin Type:</b> ${obj[i].skinType}</p>
+                        <p><b>Skin Concerns:</b> ${obj[i].skinConcerns}</p>
+                        <p><b>Cleanser:</b> ${obj[i].cleanser}</p>
+                        <p><b>Moisturizer:</b> ${obj[i].moisturizer}</p>
+                        <p><b>Sunscreen:</b> ${obj[i].sunscreen}</p>`;
+                
+
+                }
+                
+            }
+            else{
+                container.innerHTML = `<hr>404 ERROR - No routines found`;
+            }
+        };
+
+        
+        //------------------------
+        // DOWNLOAD FROM JSON
+        //------------------------
+        const downloadRoutines = (e) => {
+            // Grab URLs to download from
+            const routineURL = '/routines';
+            const routinesURL = '/routines?limit=10';
+            const dryRoutines = '/getDryRoutine';
+            const oilyRoutines = '/getOilyRoutine';
+            const comboRoutines = '/getComboRoutine';
+            const normRoutines = '/getNormalRoutine';
+            const xhr = new XMLHttpRequest();
+            xhr.onload = handleResponse;
+
+            // Return routines
+            if (e.target.id === 'btnRoutine') {
+                xhr.open('GET', routineURL);
+            } else if (e.target.id === 'btnAllRoutine') {
+                xhr.open('GET', routinesURL);
+            }else if (e.target.id === 'btnDryRoutine') {                
+                xhr.open('GET', dryRoutines);
+            }else if (e.target.id === 'btnOilyRoutine') {                
+                xhr.open('GET', oilyRoutines);
+            }else if (e.target.id === 'btnComboRoutine') {                
+                xhr.open('GET', comboRoutines);
+            }else if (e.target.id === 'btnNormRoutine') {                
+                xhr.open('GET', normRoutines);
+
+            }
+
+            xhr.setRequestHeader('Accept', 'application/javascript');
+            xhr.send();
+        };
+
+        //------------------------
+        // INITIALIZE ELEMENTS
+        //------------------------
+        const init = () => {
+            if (document.querySelector('#btnRoutine')) {
+                document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
+            }
+            if (document.querySelector('#btnAllRoutine')) {
+                document.querySelector('#btnAllRoutine').addEventListener('click', downloadRoutines);
+            }            
+            if (document.querySelector('#btnDryRoutine')) {
+                document.querySelector('#btnDryRoutine').addEventListener('click', downloadRoutines);
+            }            
+            if (document.querySelector('#btnOilyRoutine')) {
+                document.querySelector('#btnOilyRoutine').addEventListener('click', downloadRoutines);
+            }
+            if (document.querySelector('#btnComboRoutine')) {
+                document.querySelector('#btnComboRoutine').addEventListener('click', downloadRoutines);
+            }
+            if (document.querySelector('#btnNormRoutine')) {
+                document.querySelector('#btnNormRoutine').addEventListener('click', downloadRoutines);
+            }
+        };
+
+        window.onload = init;
+    </script>
 </head>
 
 
@@ -21,68 +163,31 @@
 
     <!-- MAIN  -->
     <main>
-        <h1>Welcome to Skindigo</h1>
-        <p>Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
+        <img id= "bubbly" src="/bubbles.png" alt="Icon of bubbles"><h1>Skindigo</h1>
+        <p id="desc">Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
     </main>
 
     <!-- CONTROLS  -->
-    <aside id="links ">
-        <h2>Site traversal</h2>
+    <nav id="links">
         <ul id="navigation">
-            <li><a href="/home.html">Home</a></li>
-            <li><a href="/information.html">Routine Guide</a></li>
-            <li><a href="/app.html">Routine App</a></li>
-            <li><a href="/input.html">Routine Builder</a></li>
-            <li><a href="/admin.html">Admin Page</a></li>
+            <li class="navLink"><a href="/home.html">HOME</a></li>
+            <li class="navLink"><a href="/information.html">WHERE DO I START?</a></li>
+            <li class="navLink" id="active"><a href="/app.html">ROUTINE APP</a></li>
+            <li class="navLink"><a href="/input.html">ROUTINE BUILDER</a></li>
+            <li class="navLink"><a href="/admin.html">ADMIN PAGE</a></li>
         </ul>
-    </aside>
+    </nav>
 
     <section>
-        <h2>Routine Manager (Broken!! Try Builder instead)</h2>
-        <hr>
-
-        <h2>Routine Details</h2>
-        <form id="myForm" action="/getRoutine" method="get">
-            <label for="nameGet">Name: </label>
-            <input id="nameGetField" type="text" name="nameGet">
-            <p><button id="btnRoutine">Show me my routine</button></p>
-        </form>
+        <h2>Routine Manager</h2>
+        <hr>        
+        <button id="btnRoutine">Show a Routine</button>   
         <div id="routines">
 
         </div>
         <div id="responseCodes">
 
         </div>
-
-        <h2>Update Routine</h2>
-        <form id="updateForm" action="/addRoutine" method="post">
-            <input id="dryField" type="radio" name="skin" value="dry">
-            <label for="dry">Dry</label><br>
-
-            <input id="oilyField" type="radio" name="skin" value="oily">
-            <label for="oily">Oily</label><br>
-
-            <input id="combinationField" type="radio" name="skin" value="combination">
-            <label for="combination">Combination</label> <br>
-
-            <input id="normalField" type="radio" name="skin" value="normal">
-            <label for="normal">Normal</label> <br>
-
-            <label for="name">Name: </label>
-            <input id="nameField" type="text" name="name" /><br>
-
-            <label for="cleanser">Cleanser: </label>
-            <input id="cleanserField" type="text" name="cleanser" /><br>
-
-            <label for="moisturizer">Moisturizer: </label>
-            <input id="moisturizerField" type="text" name="moisturizer" /><br>
-
-            <label for="sunscreen">Sunscreen: </label>
-            <input id="sunscreenField" type="text" name="sunscreen" /><br>
-
-            <input type="submit" value="ChangeRoutine" />
-
-        </form>
     </section>
 
     <!-- FOOTER  -->

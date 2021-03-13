@@ -11,7 +11,8 @@
         "pretest": "npx eslint ./src --fix",
         "test": "echo \"Tests complete\"",
         "start": "node ./src/server.js",
-        "nodemon": "nodemon ./src/server.js -e js,html,css"
+        "nodemon": "nodemon ./src/server.js -e js,html,css",
+        "chromeinspect": "node --inspect ./src/server.js & echo \"Now in DEBUG mode. Head to 'chrome://inspect'\""
     },
     "repository": {
         "type": "git",

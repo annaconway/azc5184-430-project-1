@@ -9,6 +9,8 @@
 
     <!-- FAVICON -->
     <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Reenie+Beanie&family=Tenor+Sans&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/default-styles.css">
     <!-- SCRIPT -->
@@ -36,6 +38,12 @@
             // Store container for AJAX call
             const container = document.querySelector('#routines');
 
+            let newObj;
+            if (obj["temp"])
+            {
+                newObj = obj["temp"];
+            }
+
             // Format into HTML
             if (obj.length === 1) {
                 container.innerHTML = `
@@ -45,22 +53,42 @@
                     <p><b>Skin Concerns:</b> ${obj[0].skinConcerns}</p>
                     <p><b>Cleanser:</b> ${obj[0].cleanser}</p>
                     <p><b>Moisturizer:</b> ${obj[0].moisturizer}</p>
-                    <p><b>Sunscreen:</b> ${obj[0].sunscreen}</p>
-                    <p><button class="editButton">Edit</button></p>`;
+                    <p><b>Sunscreen:</b> ${obj[0].sunscreen}</p>`;
 
-            } else if (obj.length > 1) {
+            } 
+            else if (newObj.length>=1)
+            {
                 container.innerHTML = "";
+                for (let i = 0; i < newObj.length; i += 1) {
+                    document.querySelector('#routines').innerHTML +=
+                        `<hr>
+                        <p><b>Name:</b> ${newObj[i].name}</p>
+                        <p><b>Skin Type:</b> ${newObj[i].skinType}</p>
+                        <p><b>Skin Concerns:</b> ${newObj[i].skinConcerns}</p>
+                        <p><b>Cleanser:</b> ${newObj[i].cleanser}</p>
+                        <p><b>Moisturizer:</b> ${newObj[i].moisturizer}</p>
+                        <p><b>Sunscreen:</b> ${newObj[i].sunscreen}</p>`;
+                
+
+                }
+            }else if (obj.length > 1) {
+                    container.innerHTML = "";
                 for (let i = 0; i < obj.length; i += 1) {
-                    document.querySelector('#jokesContainer').innerHTML +=
+                    document.querySelector('#routines').innerHTML +=
                         `<hr>
                         <p><b>Name:</b> ${obj[i].name}</p>
                         <p><b>Skin Type:</b> ${obj[i].skinType}</p>
                         <p><b>Skin Concerns:</b> ${obj[i].skinConcerns}</p>
                         <p><b>Cleanser:</b> ${obj[i].cleanser}</p>
                         <p><b>Moisturizer:</b> ${obj[i].moisturizer}</p>
-                        <p><b>Sunscreen:</b> ${obj[i].sunscreen}</p>
-                        <p><button class="editButton">Edit</button></p>`;
+                        <p><b>Sunscreen:</b> ${obj[i].sunscreen}</p>`;
+                
+
                 }
+                
+            }
+            else{
+                container.innerHTML = `<hr>404 ERROR - No routines found`;
             }
         };
 
@@ -71,14 +99,27 @@
             // Grab URLs to download from
             const routineURL = '/routines';
             const routinesURL = '/routines?limit=10';
+            const dryRoutines = '/getDryRoutine';
+            const oilyRoutines = '/getOilyRoutine';
+            const comboRoutines = '/getComboRoutine';
+            const normRoutines = '/getNormalRoutine';
             const xhr = new XMLHttpRequest();
             xhr.onload = handleResponse;
 
-            // Return 1 or >1 routine
+            // Return routines
             if (e.target.id === 'btnRoutine') {
                 xhr.open('GET', routineURL);
-            } else if (e.target.id === 'btnRoutines') {
+            } else if (e.target.id === 'btnAllRoutine') {
                 xhr.open('GET', routinesURL);
+            }else if (e.target.id === 'btnDryRoutine') {                
+                xhr.open('GET', dryRoutines);
+            }else if (e.target.id === 'btnOilyRoutine') {                
+                xhr.open('GET', oilyRoutines);
+            }else if (e.target.id === 'btnComboRoutine') {                
+                xhr.open('GET', comboRoutines);
+            }else if (e.target.id === 'btnNormRoutine') {                
+                xhr.open('GET', normRoutines);
+
             }
 
             xhr.setRequestHeader('Accept', 'application/javascript');
@@ -92,8 +133,20 @@
             if (document.querySelector('#btnRoutine')) {
                 document.querySelector('#btnRoutine').addEventListener('click', downloadRoutines);
             }
-            if (document.querySelector('#btnRoutines')) {
-                document.querySelector('#btnRoutines').addEventListener('click', downloadRoutines);
+            if (document.querySelector('#btnAllRoutine')) {
+                document.querySelector('#btnAllRoutine').addEventListener('click', downloadRoutines);
+            }            
+            if (document.querySelector('#btnDryRoutine')) {
+                document.querySelector('#btnDryRoutine').addEventListener('click', downloadRoutines);
+            }            
+            if (document.querySelector('#btnOilyRoutine')) {
+                document.querySelector('#btnOilyRoutine').addEventListener('click', downloadRoutines);
+            }
+            if (document.querySelector('#btnComboRoutine')) {
+                document.querySelector('#btnComboRoutine').addEventListener('click', downloadRoutines);
+            }
+            if (document.querySelector('#btnNormRoutine')) {
+                document.querySelector('#btnNormRoutine').addEventListener('click', downloadRoutines);
             }
         };
 
@@ -108,25 +161,29 @@
 
     <!-- MAIN  -->
     <main>
-        <h1>Welcome to Skindigo</h1>
-        <p>Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
+        <img id= "bubbly" src="/bubbles.png" alt="Icon of bubbles"><h1>Skindigo</h1>
+        <p id="desc">Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
     </main>
 
     <!-- CONTROLS  -->
-    <aside id="links ">
-        <h2>Site traversal</h2>
+    <nav id="links">
         <ul id="navigation">
-            <li><a href="/home.html">Home</a></li>
-            <li><a href="/information.html">Routine Guide</a></li>
-            <li><a href="/app.html">Routine App</a></li>
-            <li><a href="/input.html">Routine Builder</a></li>
-            <li><a href="/admin.html">Admin Page</a></li>
+            <li class="navLink"><a href="/home.html">HOME</a></li>
+            <li class="navLink"><a href="/information.html">WHERE DO I START?</a></li>
+            <li class="navLink"><a href="/app.html">ROUTINE APP</a></li>
+            <li class="navLink"><a href="/input.html">ROUTINE BUILDER</a></li>
+            <li class="navLink" id="active"><a href="/admin.html">ADMIN PAGE</a></li>
         </ul>
-    </aside>
+    </nav>
 
     <section>
         <h2>Admin Page</h2>
-        <button id="btnRoutine">Show a Routine</button>
+        <button id="btnRoutine">Show a Routine</button>        
+        <button id="btnAllRoutine">Show 10 Routines</button>        
+        <button id="btnDryRoutine">Show DRY Routines</button>                
+        <button id="btnOilyRoutine">Show OILY Routines</button>        
+        <button id="btnComboRoutine">Show COMBINATION Routines</button>
+        <button id="btnNormRoutine">Show NORMAL Routines</button>
         <div id="routines">
 
         </div>

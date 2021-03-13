@@ -9,6 +9,8 @@
 
     <!-- FAVICON -->
     <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&family=Reenie+Beanie&family=Tenor+Sans&display=swap" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/default-styles.css">
     <!-- SCRIPT -->
@@ -123,27 +125,28 @@
 
     <!-- MAIN  -->
     <main>
-        <h1>Welcome to Skindigo</h1>
-        <p>Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
+        <img id= "bubbly" src="/bubbles.png" alt="Icon of bubbles"><h1>Skindigo</h1>
+        <p id="desc">Skindigo is a skincare app that helps you figure out your skin needs. Not only can you track and post the products you use, but you can also see what products people with your skintype use as well. </p>
     </main>
 
     <!-- CONTROLS  -->
-    <aside id="links ">
-        <h2>Site traversal</h2>
+    <nav id="links">
         <ul id="navigation">
-            <li><a href="/home.html">Home</a></li>
-            <li><a href="/information.html">Routine Guide</a></li>
-            <li><a href="/app.html">Routine App</a></li>
-            <li><a href="/input.html">Routine Builder</a></li>
-            <li><a href="/admin.html">Admin Page</a></li>
+            <li class="navLink"><a href="/home.html">HOME</a></li>
+            <li class="navLink"><a href="/information.html">WHERE DO I START?</a></li>
+            <li class="navLink"><a href="/app.html">ROUTINE APP</a></li>
+            <li class="navLink" id="active"><a href="/input.html">ROUTINE BUILDER</a></li>
+            <li class="navLink"><a href="/admin.html">ADMIN PAGE</a></li>
         </ul>
-    </aside>
+    </nav>
 
     <section>
+        <br>
         <form id="personalForm" action="/addRoutine" method="post">
+            <p>Skin Type:</p>
             <div id="skinField">
-                <input id="dryField" type="radio" name="skin" value="Dry">
-                <label for="dry" checked>Dry</label><br>
+                <input id="dryField" checked type="radio" name="skin" value="Dry">
+                <label for="dry">Dry</label><br>
 
                 <input id="oilyField" type="radio" name="skin" value="Oily">
                 <label for="oily">Oily</label><br>
@@ -154,7 +157,7 @@
                 <input id="normalField" type="radio" name="skin" value="Normal">
                 <label for="normal">Normal</label> <br>
             </div>
-
+                <br>
             <label for="name">Name: </label>
             <input id="nameField" type="text" name="name" /><br>
 
@@ -182,7 +185,5 @@
         <p><i>Project 1 by Anna Conway</i></p>
     </footer>
 </body>
-
-</html>
 
 </html>
