@@ -65,7 +65,7 @@ const routineArray = [{
 },
 {
   name: 'Julie',
-  skinType: 'Combination',
+  skinType: 'Normal',
   skinConcerns: 'Acne, Blackheads, Dullness',
   cleanser: 'Neutrogena Clay Cleanser For Oily Skin',
   moisturizer: 'Neutrogena Pink Grapefruit Oil Free Moisturizer ',
@@ -73,7 +73,7 @@ const routineArray = [{
 },
 {
   name: 'Aaron',
-  skinType: 'Combination',
+  skinType: 'Dry',
   skinConcerns: 'Acne, Maintenance',
   cleanser: 'Neutrogena Oil-Free Acne Wash',
   moisturizer: 'CeraVe Moisturizing Cream',
